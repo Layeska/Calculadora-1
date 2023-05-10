@@ -28,11 +28,14 @@ class Display{
         if(numero === "." && this.valorActual.includes(".")) return
         this.valorActual = this.valorActual.toString() + numero.toString();
         this.imprimirValores()
+        console.log('agregando: ',this.valorActual)
     }
 
     imprimirValores(){
-        this.pantallaValor.textContent = this.valorActual;
-        this.pantallaResult.textContent = `${this.valorAnterior} ${this.signos[this.tipoOperacion] || ''}`;
+        this.pantallaResult.textContent = this.valorActual;
+        this.pantallaValor.textContent = `${this.valorAnterior} ${this.signos[this.tipoOperacion] || ''}`;
+        console.log('pantalla valor: ', this.pantallaValor.textContent)
+        console.log('pantalla result: ', this.pantallaResult.textContent)
     }
 
     calcular(){
@@ -46,5 +49,8 @@ class Display{
     computar(tipo){
         this.tipoOperacion !== "igual" && this.calcular();
         this.tipoOperacion = tipo;
+        this.valorAnterior = this.valorActual || this.valorAnterior
+        this.valorActual = ''
+        this.imprimirValores()
     }
 }
